@@ -6,6 +6,7 @@ import { exact } from "x402/schemes";
 import { findMatchingPaymentRequirements } from "x402/shared";
 class PaymentController {
     async createOrValidatePayment(params: ICreatePayment, headers: Record<string, string | string[] | undefined>) {
+        console.log("Received payment request with params:", params, "and headers:", headers);
         const xPayment = headers?.["x-payment"];
         if (!xPayment) {
             const payment = paymentService.createExactPaymentRequirements(params);

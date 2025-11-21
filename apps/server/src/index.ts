@@ -6,6 +6,7 @@ import pkg from "@pkg"
 const app = new Elysia()
   .use(await autoload({
     dir: "./routes",
+    prefix: "/api",
     // Ignore test files and spec files
     ignore: ["**/*.test.ts", "**/*.spec.ts"]
   }))

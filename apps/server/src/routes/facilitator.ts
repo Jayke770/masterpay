@@ -1,7 +1,5 @@
 import { Elysia, t } from 'elysia'
 import { paymentService } from '@/services/payment'
-import { paymentController } from '@/controller/payment'
-import type { ICreatePayment } from '@/types/payment'
 import type { PaymentPayload, PaymentRequirements } from 'x402/types'
 const app = new Elysia()
     .get("supported", () => paymentService.getSupportedKinds(), {
