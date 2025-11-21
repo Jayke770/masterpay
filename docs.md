@@ -2,7 +2,7 @@
 
 ## Abstract
 
-The proliferation of blockchain technologies and cryptocurrencies has led to a growing demand for seamless, secure, and scalable payment solutions. Existing integrations with third-party providers are often fragmented, time-consuming, and limited in scope. xPay proposes a unified, in-house payment rail powered by the x402 protocol, supporting major EVM blockchains and Solana, and focusing on ERC20 and SPL token payments. This thesis details the motivation, design, implementation, limitations, and future directions of xPay.
+The rapid growth of blockchain technologies and cryptocurrencies has led to a growing demand for seamless, secure, and scalable payment solutions. Existing integrations with third-party providers are often fragmented, time-consuming, and limited in scope. xPay proposes a unified, in-house payment rail powered by the x402 protocol, supporting major EVM blockchains and Solana, and focusing on ERC20 and SPL token payments. This thesis details the motivation, design, implementation, limitations, and future directions of xPay.
 
 ---
 
