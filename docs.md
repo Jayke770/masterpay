@@ -87,7 +87,7 @@ x402 is chosen for its:
 - **Create Payment Intent**: Initiate a payment, specifying chain, token, amount, and recipient.
 - **Check Payment Status**: Query the status of a payment intent.
 - **List Supported Chains/Tokens**: Discover available options.
-- **Webhook for Payment Confirmation**: Notify merchant upon payment completion.
+- **Webhook for Payment Confirmation**: Notify merchant upon payment completion. (TODO)
 
 ### 4.5 Database Schema
 
