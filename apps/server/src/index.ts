@@ -23,4 +23,5 @@ const app = new Elysia()
   .get("/", () => "Ok", {
     tags: ["Health"],
   })
-  .listen(envConfig.PORT);
+
+export default app
