@@ -1,135 +1,194 @@
-# Turborepo starter
+# MasterPay
 
-This Turborepo starter is maintained by the Turborepo core team.
+A modern, monorepo-based payment processing platform built with Turborepo, featuring a blockchain payment API server and Next.js web applications.
 
-## Using this example
+## 🚀 Overview
 
-Run the following command:
+MasterPay is a full-stack payment solution that leverages blockchain technology to facilitate secure cryptocurrency payments. The project uses a monorepo architecture to manage multiple applications and shared packages efficiently.
 
-```sh
-npx create-turbo@latest
-```
-
-## What's inside?
-
-This Turborepo includes the following packages/apps:
-
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
+## 📦 Project Structure
 
 ```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build
-yarn dlx turbo build
-pnpm exec turbo build
+masterpay/
+├── apps/
+│   ├── server/          # Payment API server (Elysia.js)
+│   ├── web/             # Main web application (Next.js)
+│   └── docs/            # Documentation site (Next.js)
+├── packages/
+│   ├── ui/              # Shared UI components
+│   ├── eslint-config/   # Shared ESLint configurations
+│   └── typescript-config/ # Shared TypeScript configurations
 ```
 
-You can build a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+## 🛠️ Tech Stack
 
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build --filter=docs
+### Backend (Server)
+- **Framework**: [Elysia.js](https://elysiajs.com/) - Fast and lightweight web framework
+- **Database**: PostgreSQL with [Drizzle ORM](https://orm.drizzle.team/)
+- **Blockchain**: [viem](https://viem.sh/) for Ethereum interactions
+- **Payment Protocol**: x402 for cryptocurrency payments
+- **API Documentation**: OpenAPI/Swagger integration
+- **Runtime**: Bun
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build --filter=docs
-yarn exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-```
+### Frontend (Web & Docs)
+- **Framework**: [Next.js 16](https://nextjs.org/) with React 19
+- **TypeScript**: Full type safety across the codebase
+- **Styling**: CSS Modules
 
-### Develop
+### Monorepo Management
+- **Build System**: [Turborepo](https://turbo.build/) for fast, efficient builds
+- **Package Manager**: Bun 1.3.0
+- **Workspaces**: npm workspaces for package management
 
-To develop all apps and packages, run the following command:
+## 📋 Prerequisites
 
-```
-cd my-turborepo
+- Node.js >= 18
+- Bun 1.3.0 or higher
+- PostgreSQL database
 
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev
+## 🔧 Installation
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev
-yarn exec turbo dev
-pnpm exec turbo dev
-```
-
-You can develop a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
-
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev --filter=web
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev --filter=web
-yarn exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd masterpay
 ```
 
-### Remote Caching
-
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo login
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo login
-yarn exec turbo login
-pnpm exec turbo login
+2. Install dependencies:
+```bash
+bun install
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo link
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo link
-yarn exec turbo link
-pnpm exec turbo link
+3. Set up environment variables:
+```bash
+# In apps/server/.env
+DATABASE_URL=postgresql://user:password@localhost:5432/masterpay
+NODE_ENV=development
+PORT=3001
 ```
 
-## Useful Links
+4. Run database migrations:
+```bash
+cd apps/server
+bun run drizzle-kit push
+```
 
-Learn more about the power of Turborepo:
+## 🚀 Development
 
-- [Tasks](https://turborepo.com/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.com/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.com/docs/reference/configuration)
-- [CLI Usage](https://turborepo.com/docs/reference/command-line-reference)
+### Run all applications
+```bash
+bun run dev
+```
+
+### Run specific applications
+```bash
+# Server API
+cd apps/server
+bun run dev
+
+# Web application
+cd apps/web
+bun run dev
+
+# Documentation
+cd apps/docs
+bun run dev
+```
+
+### Available Scripts
+
+- `bun run dev` - Start all applications in development mode
+- `bun run build` - Build all applications
+- `bun run lint` - Lint all packages
+- `bun run format` - Format code with Prettier
+- `bun run check-types` - Type check all packages
+
+## 📡 API Server
+
+The payment API server is built with Elysia.js and provides:
+
+- **Payment Processing**: Create and manage cryptocurrency payments
+- **Multi-Network Support**: Support for multiple blockchain networks
+- **OpenAPI Documentation**: Auto-generated API documentation (available in development mode)
+- **Database Persistence**: PostgreSQL with Drizzle ORM
+
+### Key Features:
+- RESTful API design
+- Automatic route loading
+- Type-safe database schemas
+- Health check endpoints
+- OpenAPI/Swagger documentation at `/swagger`
+
+### Database Schema:
+- **Payments Table**: Stores payment transactions with amount, asset address, recipient, and network information
+
+## 🌐 Web Applications
+
+### Web App (Port 3000)
+Main user-facing application for interacting with the payment platform.
+
+### Docs App
+Documentation and guides for using the MasterPay platform.
+
+## 📦 Shared Packages
+
+### @repo/ui
+Reusable React components:
+- `Button` - Customizable button component
+- `Card` - Card container component
+- `Code` - Code display component
+
+### @repo/eslint-config
+Shared ESLint configurations:
+- `base` - Base configuration
+- `next` - Next.js specific rules
+- `react-internal` - React internal package rules
+
+### @repo/typescript-config
+Shared TypeScript configurations:
+- `base.json` - Base TypeScript config
+- `nextjs.json` - Next.js optimized config
+- `react-library.json` - React library config
+
+## 🔐 Environment Variables
+
+### Server (`apps/server/.env`)
+```env
+DATABASE_URL=postgresql://...
+NODE_ENV=development
+PORT=3001
+```
+
+## 🏗️ Building for Production
+
+```bash
+bun run build
+```
+
+This will build all applications and packages in the correct order using Turborepo's dependency graph.
+
+## 📝 API Documentation
+
+When running the server in development mode, OpenAPI documentation is available at:
+```
+http://localhost:3001/swagger
+```
+
+## 🤝 Contributing
+
+1. Create a feature branch
+2. Make your changes
+3. Run type checks and linting: `bun run check-types && bun run lint`
+4. Submit a pull request
+
+## 📄 License
+
+[Add your license information here]
+
+## 🔗 Links
+
+- [Turborepo Documentation](https://turbo.build/repo/docs)
+- [Elysia.js Documentation](https://elysiajs.com/)
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Drizzle ORM Documentation](https://orm.drizzle.team/)
+- [viem Documentation](https://viem.sh/)
