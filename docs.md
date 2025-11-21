@@ -1,8 +1,8 @@
-# MasterPay: Unified Crypto Payment Rail for EVM and Solana
+# xPay: Unified Crypto Payment Rail for EVM and Solana
 
 ## Abstract
 
-The proliferation of blockchain technologies and cryptocurrencies has led to a growing demand for seamless, secure, and scalable payment solutions. Existing integrations with third-party providers are often fragmented, time-consuming, and limited in scope. MasterPay proposes a unified, in-house payment rail powered by the x402 protocol, supporting major EVM blockchains and Solana, and focusing on ERC20 and SPL token payments. This thesis details the motivation, design, implementation, limitations, and future directions of MasterPay.
+The proliferation of blockchain technologies and cryptocurrencies has led to a growing demand for seamless, secure, and scalable payment solutions. Existing integrations with third-party providers are often fragmented, time-consuming, and limited in scope. xPay proposes a unified, in-house payment rail powered by the x402 protocol, supporting major EVM blockchains and Solana, and focusing on ERC20 and SPL token payments. This thesis details the motivation, design, implementation, limitations, and future directions of xPay.
 
 ---
 
@@ -14,7 +14,7 @@ Cryptocurrency adoption is accelerating across industries, with businesses seeki
 
 ### 1.2 Motivation
 
-The need for a unified, developer-friendly payment rail is clear. MasterPay aims to:
+The need for a unified, developer-friendly payment rail is clear. xPay aims to:
 
 - Reduce integration time and complexity for merchants.
 - Provide a consistent API across multiple blockchains.
@@ -36,7 +36,7 @@ Current crypto payment solutions suffer from:
 
 ## 3. Solution Overview
 
-Ed3nPay is an in-house payment rail built on the x402 protocol, designed to support:
+xPay is an in-house payment rail built on the x402 protocol, designed to support:
 
 - All major EVM blockchains (Ethereum, Polygon, BSC, Arbitrum, Optimism, etc.)
 - Solana blockchain
@@ -91,7 +91,7 @@ x402 is chosen for its:
 
 ### 4.5 Database Schema
 
-- **Payments Table**: Stores payment transactions, including amount, asset address, recipient, network, timestamps, and status.
+- **Payments Table**: TODO
 
 ---
 
@@ -115,14 +115,30 @@ x402 is chosen for its:
 - **Site**: Next.js app in `apps/docs`
 - **Content**: Thesis-style documentation, API reference, integration guides
 
+### 5.4 Server Requirements
+
+To run the xPay server in production, the following minimum requirements are recommended:
+
+- **CPU:** 2 vCPUs (modern x86_64 or ARM)
+- **RAM:** 2 GB (minimum), 4 GB or more recommended for higher traffic
+- **Storage:** SSD, 10 GB free (for database and logs)
+- **Network:** Reliable broadband connection
+- **OS:** Linux (Ubuntu 20.04+, Debian, or similar), macOS, or modern Windows Server
+- **Database:** PostgreSQL (hosted or local)
+- **Cache/Queue:** Redis (recommended for caching, session management, and background jobs)
+- **Blockchain Connectivity:** RPC endpoints for all supported blockchains (EVM, Solana, etc.)
+    - Use reliable public or private RPC providers (e.g., Infura, Alchemy, QuickNode, Chainstack, Solana RPC)
+
+For development or low-traffic environments, 1 vCPU and 1 GB RAM may suffice. For high throughput or large-scale deployments, scale resources accordingly and consider load balancing, database replication, Redis clustering, and high-availability RPC endpoints.
+
 ---
 
 ## 6. Payment Flow
 
-1. **Merchant Integration**: Merchant integrates MasterPay API.
+1. **Merchant Integration**: Merchant integrates xPay API.
 2. **Payment Intent Creation**: Merchant creates a payment intent via API.
 3. **User Payment**: User pays using their wallet (Metamask, Phantom, etc.).
-4. **On-Chain Verification**: MasterPay verifies transaction and updates status.
+4. **On-Chain Verification**: xPay verifies transaction and updates status.
 5. **Merchant Notification**: Webhook or polling for payment confirmation.
 
 ### Payment Flow Diagram
@@ -171,7 +187,7 @@ bun install
 Create `.env` in `apps/server`:
 
 ```
-DATABASE_URL=postgresql://user:password@localhost:5432/masterpay
+DATABASE_URL=postgresql://user:password@localhost:5432/xpay
 NODE_ENV=development
 PORT=3001
 ```
@@ -193,7 +209,7 @@ Visit `http://localhost:3001/swagger` for interactive documentation.
 1. Merchant calls `POST /payments` to create a payment intent.
 2. User is redirected to a payment page with wallet connect.
 3. User sends ERC20/SPL token to the provided address.
-4. MasterPay verifies the transaction and updates status.
+4. xPay verifies the transaction and updates status.
 5. Merchant receives webhook or polls for confirmation.
 
 ---
