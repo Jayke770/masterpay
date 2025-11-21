@@ -1,0 +1,30 @@
+{
+  "name": "masterpay",
+  "description": "API documentation for Ed3n Pay server",
+  "version": "1.0.50",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "bun run --watch src/index.ts"
+  },
+  "dependencies": {
+    "@elysiajs/openapi": "^1.4.11",
+    "axios": "^1.13.2",
+    "dotenv": "^17.2.3",
+    "drizzle-orm": "^0.44.7",
+    "elysia": "latest",
+    "elysia-autoload": "^1.7.0",
+    "postgres": "^3.4.7",
+    "thirdweb": "^5.112.4",
+    "viem": "^2.39.3",
+    "x402": "^0.7.2",
+    "x402-axios": "^0.7.0",
+    "x402-fetch": "^0.7.0",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "bun-types": "latest",
+    "drizzle-kit": "^0.31.7",
+    "tsx": "^4.20.6"
+  },
+  "module": "src/index.js"
+}
