@@ -2,14 +2,14 @@ import { Elysia, t } from 'elysia'
 import { paymentController } from '@/controller/payment'
 import type { ICreatePayment } from '@/types/payment'
 const app = new Elysia()
-    .post("create", ({ body, headers }) => paymentController.createOrValidatePayment(body as ICreatePayment, headers), {
+    .post("create", ({ body, headers, set }) => paymentController.createOrValidatePayment(body as ICreatePayment, headers, set), {
         tags: ["Payment"],
         detail: {
             description: "Create payment requirements for a resource"
         },
         headers: t.Object({
             "x-payment": t.Optional(t.String())
-        }),
+        }), 
         body: t.Object({
             description: t.Optional(t.String()),
             price: t.Union([

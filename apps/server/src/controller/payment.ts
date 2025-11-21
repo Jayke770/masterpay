@@ -1,11 +1,35 @@
 import type { ICreatePayment } from "@/types/payment";
 import { paymentService } from '@/services/payment'
-import { status } from "elysia";
-import { PaymentRequirementsSchema, type PaymentPayload, type PaymentRequirements } from "x402/types";
+import { HTTPHeaders, status, StatusMap } from "elysia";
+import { PaymentRequirementsSchema, settleResponseHeader, type PaymentPayload, type PaymentRequirements } from "x402/types";
 import { exact } from "x402/schemes";
 import { findMatchingPaymentRequirements } from "x402/shared";
+import { ElysiaCookie } from "elysia/cookies";
 class PaymentController {
-    async createOrValidatePayment(params: ICreatePayment, headers: Record<string, string | string[] | undefined>) {
+    async createOrValidatePayment(
+        params: ICreatePayment,
+        headers: Record<string, string | string[] | undefined>,
+        set: {
+            headers: HTTPHeaders;
+            status?: number | keyof StatusMap;
+            /**
+             * @deprecated Use inline redirect instead
+             *
+             * @example Migration example
+             * ```ts
+             * new Elysia()
+             *     .get(({ redirect }) => redirect('/'))
+             * ```
+             */
+            redirect?: string;
+            /**
+             * ! Internal Property
+             *
+             * Use `Context.cookie` instead
+             */
+            cookie?: Record<string, ElysiaCookie>;
+        }
+    ) {
         console.log("Received payment request with params:", params, "and headers:", headers);
         const xPayment = headers?.["x-payment"];
         if (!xPayment) {
@@ -19,8 +43,9 @@ class PaymentController {
         if (!selectedPaymentRequirement) {
             return status(400, { error: "No matching payment requirements found" });
         }
-        const response = await paymentService.facilitator.settle(decodedPayment, selectedPaymentRequirement);
-        console.log("Payment verification response:", response);
+        const response = await paymentService.facilitator.settle(decodedPayment, selectedPaymentRequirement);  
+        set.headers["X-PAYMENT-RESPONSE"] = settleResponseHeader(response)
+        return response;
     }
 }
 export const paymentController = new PaymentController();
