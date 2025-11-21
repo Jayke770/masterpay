@@ -12,7 +12,11 @@ const response = await fetchWithPayment("http://localhost:1000/payment/create", 
         "resource": "http://localhost:1000",
         "payTo": "0x379f8d913A7C39B5d1A538C6B3008edb814edc6C",
         "network": "base-sepolia",
-        "maxTimeoutSeconds": 300
+        "maxTimeoutSeconds": 300,
+        "extra": {
+            "name": "USDC",
+            "version": "2",
+        }
     }),
     headers: {
         "Content-Type": "application/json"

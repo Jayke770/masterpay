@@ -36,7 +36,8 @@ const app = new Elysia()
             resource: t.String({ description: "The resource the payment" }),
             payTo: t.String({ description: "The address to pay to" }),
             network: t.String({ description: "The network to use for the payment", default: "base-sepolia" }),
-            maxTimeoutSeconds: t.Number({ default: 120 }),
+            maxTimeoutSeconds: t.Number({ default: 120 }), 
+            extra: t.Optional(t.Record(t.String(), t.Any()))
         })
     })
 export default app

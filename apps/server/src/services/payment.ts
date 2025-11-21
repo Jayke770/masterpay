@@ -2,23 +2,19 @@ import { envConfig } from "@/lib/environment";
 import type { ICreatePayment } from "@/types/payment";
 import { processPriceToAtomicAmount } from "x402/shared";
 import {
-    PaymentRequirementsSchema,
     type PaymentRequirements,
     type PaymentPayload,
-    PaymentPayloadSchema,
-    createConnectedClient,
     createSigner,
+    createConnectedClient,
     SupportedEVMNetworks,
     SupportedSVMNetworks,
     Signer,
-    ConnectedClient,
     SupportedPaymentKind,
     isSvmSignerWallet,
     type X402Config,
-    SvmConfig,
-    Price,
     Network,
-    Resource
+    Resource,
+    ConnectedClient
 } from "x402/types";
 import { useFacilitator } from "x402/verify";
 
@@ -91,15 +87,15 @@ class PaymentService {
     async verifyPayment(paymentPayload: PaymentPayload, paymentRequirements: PaymentRequirements) {
         console.log("Verifying payment with payload:", paymentPayload);
         console.log("Against requirements:", paymentRequirements);
-        let signer: Signer;
+        let client: Signer | ConnectedClient;
         if (SupportedEVMNetworks.includes(paymentRequirements.network as Network)) {
-            signer = await createSigner(paymentRequirements.network, envConfig.PRIVATE_KEY.PRIVATE_KEY_EVM);
+            client = createConnectedClient(paymentRequirements.network);
         } else if (SupportedSVMNetworks.includes(paymentRequirements.network as Network)) {
-            signer = await createSigner(paymentRequirements.network, envConfig.PRIVATE_KEY.PRIVATE_KEY_SOLANA);
+            client = await createSigner(paymentRequirements.network, envConfig.PRIVATE_KEY.PRIVATE_KEY_SOLANA);
         } else {
             throw new Error("Invalid network");
         }
-        const valid = await verify(signer, paymentPayload, paymentRequirements, this.x402Config);
+        const valid = await verify(client, paymentPayload, paymentRequirements, this.x402Config);
         return valid;
     }
 

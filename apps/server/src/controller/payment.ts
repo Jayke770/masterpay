@@ -18,7 +18,7 @@ class PaymentController {
         if (!selectedPaymentRequirement) {
             return status(400, { error: "No matching payment requirements found" });
         }
-        const response = await paymentService.facilitator.verify(decodedPayment, selectedPaymentRequirement);
+        const response = await paymentService.facilitator.settle(decodedPayment, selectedPaymentRequirement);
         console.log("Payment verification response:", response);
     }
 }
